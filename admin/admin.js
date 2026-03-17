@@ -1,4 +1,4 @@
-const API_URL = " https://nagoda-review-api.sejanrandinu01.workers.dev";
+const API_URL = "https://nagoda-review-api.sejanrandinu01.workers.dev/api/reviews";
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
 
