@@ -66,8 +66,28 @@
             </div>
 
             <div class="form-group">
-                <label for="userPurpose" id="purposeLabel">පැමිණි කාර්යය (කැමති නම් පමණක්)</label>
-                <input type="text" id="userPurpose" name="userPurpose" placeholder="ඔබ පැමිණි කාර්යය ඇතුළත් කරන්න">
+                <label for="userPurposeSelect" id="purposeLabel">පැමිණි කාර්යය (කැමති නම් පමණක්)</label>
+                <select id="userPurposeSelect" name="userPurposeSelect">
+                    <option value="" id="purposeOptionDefault">-- කරුණාකර තෝරන්න --</option>
+                    <option value="registry" id="purposeOptionRegistry">රෙජිස්ට්‍රාර් අංශයේ කටයුතු</option>
+                    <option value="nic" id="purposeOptionNIC">හැඳුනුම්පත් අංශයේ කටයුතු</option>
+                    <option value="timberFelling" id="purposeOptionTimberFelling">දැව හෙළීම් කටයුතු</option>
+                    <option value="timberTransport" id="purposeOptionTimberTransport">දැව ප්‍රවාහන කටයුතු</option>
+                    <option value="animalTransport" id="purposeOptionAnimalTransport">සතුන් ප්‍රවාහන කටයුතු</option>
+                    <option value="businessReg" id="purposeOptionBusinessReg">ව්‍යාපාර ලියාපදිංචි කටයුතු</option>
+                    <option value="soilSandStone" id="purposeOptionSoilSandStone">පස්, වැලි, කළුගල් සම්බන්ධ කටයුතු</option>
+                    <option value="exciseDuty" id="purposeOptionExciseDuty">සුරාබදු සම්බන්ධ කටයුතු</option>
+                    <option value="vehicleFines" id="purposeOptionVehicleFines">වාහන දඩ ගෙවීම පිළිබඳ කටයුතු</option>
+                    <option value="touristBungalow" id="purposeOptionTouristBungalow">සංචාරක බංගලා වෙන් කිරීම</option>
+                    <option value="informationAct" id="purposeOptionInformationAct">තොරතුරු පනත සම්බන්ධ කටයුතු</option>
+                    <option value="incomeCertificate" id="purposeOptionIncomeCertificate">ආදායම් සහතික නිකුත් කිරීම</option>
+                    <option value="mahapola" id="purposeOptionMahapola">මහපොළ ශිෂ්‍යත්ව සම්බන්ධ කටයුතු</option>
+                    <option value="other" id="purposeOptionOther">වෙනත්</option>
+                </select>
+            </div>
+
+            <div class="form-group hidden" id="otherPurposeGroup">
+                <input type="text" id="userPurposeOther" name="userPurposeOther" placeholder="ඔබ පැමිණි කාර්යය ඇතුළත් කරන්න">
             </div>
 
             <div class="form-group">
