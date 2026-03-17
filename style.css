@@ -12,9 +12,9 @@
     --rating-bad: #EF4444;
     --rating-bad-light: #FEE2E2;
     --rating-happy: #F59E0B;
-    --rating-happy-light: #D1FAE5;
+    --rating-happy-light: #FEF3C7;
     --rating-very-happy: #10B981;
-    --rating-very-happy-light: #FEF3C7;
+    --rating-very-happy-light: #D1FAE5;
 
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -361,6 +361,24 @@ textarea::placeholder {
 .new-review-btn:hover {
     background: var(--primary);
     color: white;
+}
+
+/* Custom Elements */
+.dept-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
 }
 
 /* Responsive */
