@@ -1,0 +1,137 @@
+const translations = {
+    si: {
+        title: "පැමිණිලි සහ ප්‍රතිචාර",
+        nameLabel: "නම (කැමති නම් පමණක්)",
+        namePlaceholder: "ඔබේ නම ඇතුළත් කරන්න",
+        messageLabel: "පණිවිඩය (කැමති නම් පමණක්)",
+        messagePlaceholder: "ඔබේ අදහස මෙහි ලියන්න...",
+        ratingBad: "නරකයි",
+        ratingHappy: "සතුටුදායකයි",
+        ratingVeryHappy: "ඉතා සතුටුදායකයි",
+        submitBtn: "යොමු කරන්න",
+        thankYouText: "ඔබේ ප්‍රතිචාරයට ස්තුතියි!",
+        newReviewBtn: "තවත් ප්‍රතිචාරයක්",
+        docTitle: "පැමිණිලි සහ ප්‍රතිචාර"
+    },
+    ta: {
+        title: "புகார்கள் மற்றும் விமர்சனங்கள்",
+        nameLabel: "பெயர் (விருப்பமிருந்தால் மட்டும்)",
+        namePlaceholder: "உங்கள் பெயரை உள்ளிடவும்",
+        messageLabel: "செய்தி (விருப்பமிருந்தால் மட்டும்)",
+        messagePlaceholder: "உங்கள் கருத்தை இங்கே எழுதவும்...",
+        ratingBad: "மோசம்",
+        ratingHappy: "திருப்தி",
+        ratingVeryHappy: "மிகவும் திருப்தி",
+        submitBtn: "சமர்ப்பிக்க",
+        thankYouText: "உங்கள் கருத்துக்கு நன்றி!",
+        newReviewBtn: "மீண்டும்",
+        docTitle: "புகார்கள் மற்றும் விமர்சனங்கள்"
+    },
+    en: {
+        title: "Complaints & Reviews",
+        nameLabel: "Name (Optional)",
+        namePlaceholder: "Enter your name",
+        messageLabel: "Message (Optional)",
+        messagePlaceholder: "Write your feedback here...",
+        ratingBad: "Bad",
+        ratingHappy: "Happy",
+        ratingVeryHappy: "Very Happy",
+        submitBtn: "Submit",
+        thankYouText: "Thank you for your feedback!",
+        newReviewBtn: "Submit Another",
+        docTitle: "Complaints & Reviews"
+    }
+};
+
+let currentLang = 'si';
+
+// DOM Elements
+const langBtns = document.querySelectorAll('.lang-btn');
+const titleText = document.getElementById('titleText');
+const nameLabel = document.getElementById('nameLabel');
+const userNameInput = document.getElementById('userName');
+const messageLabel = document.getElementById('messageLabel');
+const userMessageInput = document.getElementById('userMessage');
+const ratingBadText = document.getElementById('ratingBadText');
+const ratingHappyText = document.getElementById('ratingHappyText');
+const ratingVeryHappyText = document.getElementById('ratingVeryHappyText');
+const submitBtn = document.getElementById('submitBtn');
+const thankYouText = document.getElementById('thankYouText');
+const newReviewBtn = document.getElementById('newReviewBtn');
+const reviewForm = document.getElementById('reviewForm');
+const successMessage = document.getElementById('successMessage');
+
+// Language Switcher
+langBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove active class from all
+        langBtns.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked
+        btn.classList.add('active');
+        
+        currentLang = btn.getAttribute('data-lang');
+        updateLanguage();
+    });
+});
+
+function updateLanguage() {
+    const t = translations[currentLang];
+    
+    document.title = t.docTitle;
+    document.documentElement.lang = currentLang;
+    
+    // Updates
+    titleText.textContent = t.title;
+    
+    nameLabel.textContent = t.nameLabel;
+    userNameInput.placeholder = t.namePlaceholder;
+    
+    messageLabel.textContent = t.messageLabel;
+    userMessageInput.placeholder = t.messagePlaceholder;
+    
+    ratingBadText.textContent = t.ratingBad;
+    ratingHappyText.textContent = t.ratingHappy;
+    ratingVeryHappyText.textContent = t.ratingVeryHappy;
+    
+    submitBtn.textContent = t.submitBtn;
+    
+    thankYouText.textContent = t.thankYouText;
+    newReviewBtn.textContent = t.newReviewBtn;
+}
+
+// Form Submission
+reviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Check if rating is selected
+    const rating = document.querySelector('input[name="rating"]:checked');
+    if (!rating) {
+        alert("Please select a rating.");
+        return;
+    }
+    
+    // Simulate submission (e.g., API call)
+    submitBtn.disabled = true;
+    submitBtn.textContent = "...";
+    
+    setTimeout(() => {
+        reviewForm.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+        
+        // Reset form
+        reviewForm.reset();
+        submitBtn.disabled = false;
+        
+        // Restore submit button text based on lang
+        updateLanguage();
+    }, 800);
+});
+
+// Reset after success
+newReviewBtn.addEventListener('click', () => {
+    successMessage.classList.add('hidden');
+    reviewForm.classList.remove('hidden');
+});
+
+// Initialize language
+updateLanguage();

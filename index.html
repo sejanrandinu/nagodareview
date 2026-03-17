@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>පැමිණිලි සහ ප්‍රතිචාර | Complaints & Reviews</title>
+    <meta name="description" content="Submit your feedback and complaints easily.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-shape shape-1"></div>
+    <div class="background-shape shape-2"></div>
+    <div class="background-shape shape-3"></div>
+
+    <div class="container">
+        <header class="header">
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="si">සිංහල</button>
+                <button class="lang-btn" data-lang="ta">தமிழ்</button>
+                <button class="lang-btn" data-lang="en">English</button>
+            </div>
+            <h1 id="titleText">පැමිණිලි සහ ප්‍රතිචාර</h1>
+        </header>
+
+        <form id="reviewForm" class="review-form">
+            
+            <div class="rating-section">
+                <div class="rating-options">
+                    <label class="rating-option" for="rating-bad">
+                        <input type="radio" name="rating" id="rating-bad" value="bad" required>
+                        <div class="emoji-container">
+                            <span class="emoji">😞</span>
+                        </div>
+                        <span class="rating-label" id="ratingBadText">නරකයි</span>
+                    </label>
+                    
+                    <label class="rating-option" for="rating-happy">
+                        <input type="radio" name="rating" id="rating-happy" value="happy">
+                        <div class="emoji-container">
+                            <span class="emoji">😊</span>
+                        </div>
+                        <span class="rating-label" id="ratingHappyText">සතුටුදායකයි</span>
+                    </label>
+                    
+                    <label class="rating-option" for="rating-very-happy">
+                        <input type="radio" name="rating" id="rating-very-happy" value="very-happy">
+                        <div class="emoji-container">
+                            <span class="emoji">🤩</span>
+                        </div>
+                        <span class="rating-label" id="ratingVeryHappyText">ඉතා සතුටුදායකයි</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="userName" id="nameLabel">නම (කැමති නම් පමණක්)</label>
+                <input type="text" id="userName" name="userName" placeholder="ඔබේ නම ඇතුළත් කරන්න">
+            </div>
+
+            <div class="form-group">
+                <label for="userAddress" id="addressLabel">ලිපිනය (කැමති නම් පමණක්)</label>
+                <input type="text" id="userAddress" name="userAddress" placeholder="ඔබේ ලිපිනය ඇතුළත් කරන්න">
+            </div>
+
+            <div class="form-group">
+                <label for="userPurpose" id="purposeLabel">පැමිණි කාර්යය (කැමති නම් පමණක්)</label>
+                <input type="text" id="userPurpose" name="userPurpose" placeholder="ඔබ පැමිණි කාර්යය ඇතුළත් කරන්න">
+            </div>
+
+            <div class="form-group">
+                <label for="userMessage" id="messageLabel">පණිවිඩය (කැමති නම් පමණක්)</label>
+                <textarea id="userMessage" name="userMessage" rows="4" placeholder="ඔබේ අදහස මෙහි ලියන්න..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">යොමු කරන්න</button>
+        </form>
+
+        <div id="successMessage" class="success-message hidden">
+            <div class="success-icon">✨</div>
+            <h2 id="thankYouText">ඔබේ ප්‍රතිචාරයට ස්තුතියි!</h2>
+            <button id="newReviewBtn" class="new-review-btn">ගොස් තවත් එකක්</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
