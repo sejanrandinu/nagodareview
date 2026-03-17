@@ -1,66 +1,84 @@
+const API_URL = " https://nagoda-review-api.sejanrandinu01.workers.dev";
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
 
     document.getElementById('clearBtn').addEventListener('click', () => {
-        if(confirm("ඔබට සියලුම දත්ත මැකීමට අවශ්‍ය බව විශ්වාසද? / Are you sure you want to delete all reviews?")) {
-            localStorage.removeItem('reviews');
-            loadData();
+        if (confirm("ඔබට සියලුම දත්ත මැකීමට අවශ්‍ය බව විශ්වාසද? / Are you sure you want to delete all reviews?")) {
+            fetch(API_URL, { method: "DELETE" })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        loadData();
+                    } else {
+                        alert("Failed to clear data.");
+                    }
+                })
+                .catch(err => {
+                    console.error("Error clearing data:", err);
+                    alert("Network error.");
+                });
         }
     });
 });
 
 function loadData() {
     const tableBody = document.getElementById('tableBody');
-    const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-    
-    // Sort reviews (newest first)
-    reviews.sort((a, b) => b.id - a.id);
+    tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 3rem; color: #64748B;">Loading...</td></tr>';
 
-    let veryHappyCount = 0;
-    let happyCount = 0;
-    let badCount = 0;
+    fetch(API_URL)
+        .then(res => res.json())
+        .then(reviews => {
+            let veryHappyCount = 0;
+            let happyCount = 0;
+            let badCount = 0;
 
-    tableBody.innerHTML = '';
+            tableBody.innerHTML = '';
 
-    if(reviews.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 3rem; color: #64748B;">No responses found yet.</td></tr>';
-        updateStats(0, 0, 0, 0);
-        return;
-    }
+            if (!reviews || reviews.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 3rem; color: #64748B;">No responses found yet.</td></tr>';
+                updateStats(0, 0, 0, 0);
+                return;
+            }
 
-    reviews.forEach(review => {
-        const row = document.createElement('tr');
-        
-        let badgeClass = '';
-        let displayRating = '';
-        if(review.rating === 'very-happy') {
-            badgeClass = 'badge-very-happy';
-            displayRating = 'ඉතා සතුටුදායකයි 🤩';
-            veryHappyCount++;
-        } else if(review.rating === 'happy') {
-            badgeClass = 'badge-happy';
-            displayRating = 'සතුටුදායකයි 😊';
-            happyCount++;
-        } else {
-            badgeClass = 'badge-bad';
-            displayRating = 'නරකයි 😞';
-            badCount++;
-        }
+            reviews.forEach(review => {
+                const row = document.createElement('tr');
 
-        row.innerHTML = `
-            <td style="white-space:nowrap; font-size:0.875rem;">${review.date}</td>
-            <td><span class="${badgeClass}">${displayRating}</span></td>
-            <td><strong style="color: #0F172A;">${escapeHtml(review.name)}</strong></td>
-            <td>${escapeHtml(review.address)}</td>
-            <td>${escapeHtml(review.purpose)}</td>
-            <td>${escapeHtml(review.message)}</td>
-            <td style="text-transform:uppercase; font-size:0.75rem; color:#64748B; font-weight:700;">${review.lang}</td>
-        `;
-        
-        tableBody.appendChild(row);
-    });
+                let badgeClass = '';
+                let displayRating = '';
+                if (review.rating === 'very-happy') {
+                    badgeClass = 'badge-very-happy';
+                    displayRating = 'ඉතා සතුටුදායකයි 🤩';
+                    veryHappyCount++;
+                } else if (review.rating === 'happy') {
+                    badgeClass = 'badge-happy';
+                    displayRating = 'සතුටුදායකයි 😊';
+                    happyCount++;
+                } else {
+                    badgeClass = 'badge-bad';
+                    displayRating = 'නරකයි 😞';
+                    badCount++;
+                }
 
-    updateStats(reviews.length, veryHappyCount, happyCount, badCount);
+                row.innerHTML = `
+                <td style="white-space:nowrap; font-size:0.875rem;">${review.date}</td>
+                <td><span class="${badgeClass}">${displayRating}</span></td>
+                <td><strong style="color: #0F172A;">${escapeHtml(review.name)}</strong></td>
+                <td>${escapeHtml(review.address)}</td>
+                <td>${escapeHtml(review.purpose)}</td>
+                <td>${escapeHtml(review.message)}</td>
+                <td style="text-transform:uppercase; font-size:0.75rem; color:#64748B; font-weight:700;">${review.lang}</td>
+            `;
+
+                tableBody.appendChild(row);
+            });
+
+            updateStats(reviews.length, veryHappyCount, happyCount, badCount);
+        })
+        .catch(err => {
+            console.error("Error loading data:", err);
+            tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 3rem; color: #EF4444;">Failed to load data. Please check your API connection.</td></tr>';
+            updateStats(0, 0, 0, 0);
+        });
 }
 
 function updateStats(total, veryHappy, happy, bad) {
@@ -73,9 +91,9 @@ function updateStats(total, veryHappy, happy, bad) {
 function escapeHtml(unsafe) {
     if (!unsafe) return '-';
     return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }

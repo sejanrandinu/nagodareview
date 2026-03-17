@@ -1,3 +1,5 @@
+const API_URL = "https://nagoda-review-api.sejanrandinu01.workers.dev"; // Change this to your deployed worker URL
+
 const translations = {
     si: {
         deptTitle: "නාගොඩ ප්‍රාදේශීය ලේකම් කාර්යාලය - ආයතන අංශය",
@@ -83,7 +85,7 @@ langBtns.forEach(btn => {
         langBtns.forEach(b => b.classList.remove('active'));
         // Add active class to clicked
         btn.classList.add('active');
-        
+
         currentLang = btn.getAttribute('data-lang');
         updateLanguage();
     });
@@ -91,32 +93,32 @@ langBtns.forEach(btn => {
 
 function updateLanguage() {
     const t = translations[currentLang];
-    
+
     document.title = t.docTitle;
     document.documentElement.lang = currentLang;
-    
+
     // Updates
     document.getElementById('deptTitleText').textContent = t.deptTitle;
     titleText.textContent = t.title;
-    
+
     nameLabel.textContent = t.nameLabel;
     userNameInput.placeholder = t.namePlaceholder;
-    
+
     document.getElementById('addressLabel').textContent = t.addressLabel;
     document.getElementById('userAddress').placeholder = t.addressPlaceholder;
-    
+
     document.getElementById('purposeLabel').textContent = t.purposeLabel;
     document.getElementById('userPurpose').placeholder = t.purposePlaceholder;
-    
+
     messageLabel.textContent = t.messageLabel;
     userMessageInput.placeholder = t.messagePlaceholder;
-    
+
     ratingBadText.textContent = t.ratingBad;
     ratingHappyText.textContent = t.ratingHappy;
     ratingVeryHappyText.textContent = t.ratingVeryHappy;
-    
+
     submitBtn.textContent = t.submitBtn;
-    
+
     thankYouText.textContent = t.thankYouText;
     newReviewBtn.textContent = t.newReviewBtn;
 }
@@ -124,18 +126,16 @@ function updateLanguage() {
 // Form Submission
 reviewForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     // Check if rating is selected
     const rating = document.querySelector('input[name="rating"]:checked');
     if (!rating) {
         alert("Please select a rating.");
         return;
     }
-    
-    // Save data to localStorage (to be retrieved by admin dashboard)
+
+    // Prepare data to send to API
     const reviewData = {
-        id: Date.now(),
-        date: new Date().toLocaleString(),
         lang: currentLang,
         rating: rating.value,
         name: userNameInput.value || "Anonymous",
@@ -144,25 +144,34 @@ reviewForm.addEventListener('submit', (e) => {
         message: userMessageInput.value || "-"
     };
 
-    let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-    reviews.push(reviewData);
-    localStorage.setItem('reviews', JSON.stringify(reviews));
-
-    // Simulate submission UI delay
     submitBtn.disabled = true;
     submitBtn.textContent = "...";
-    
-    setTimeout(() => {
-        reviewForm.classList.add('hidden');
-        successMessage.classList.remove('hidden');
-        
-        // Reset form
-        reviewForm.reset();
-        submitBtn.disabled = false;
-        
-        // Restore submit button text based on lang
-        updateLanguage();
-    }, 800);
+
+    fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(reviewData)
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                reviewForm.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+                reviewForm.reset();
+            } else {
+                alert("Submission failed. Please try again.");
+            }
+        })
+        .catch(err => {
+            console.error("Error:", err);
+            alert("Network error. Please try again later.");
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            updateLanguage();
+        });
 });
 
 // Reset after success

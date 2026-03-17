@@ -1,0 +1,8 @@
+name = "nagoda-review-api"
+main = "src/index.js"
+compatibility_date = "2024-03-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "reviews_db"
+database_id = "d300aad7-ba9f-4d46-8a1b-c4b7e9743c77"
