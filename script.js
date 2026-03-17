@@ -132,7 +132,23 @@ reviewForm.addEventListener('submit', (e) => {
         return;
     }
     
-    // Simulate submission (e.g., API call)
+    // Save data to localStorage (to be retrieved by admin dashboard)
+    const reviewData = {
+        id: Date.now(),
+        date: new Date().toLocaleString(),
+        lang: currentLang,
+        rating: rating.value,
+        name: userNameInput.value || "Anonymous",
+        address: document.getElementById('userAddress').value || "-",
+        purpose: document.getElementById('userPurpose').value || "-",
+        message: userMessageInput.value || "-"
+    };
+
+    let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+    reviews.push(reviewData);
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+
+    // Simulate submission UI delay
     submitBtn.disabled = true;
     submitBtn.textContent = "...";
     
