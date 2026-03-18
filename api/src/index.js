@@ -24,12 +24,12 @@ export default {
 
             if (request.method === "POST") {
                 const data = await request.json();
-                
+
                 await env.DB.prepare(
                     "INSERT INTO reviews (id, date, lang, rating, name, address, purpose, message) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)"
                 ).bind(
                     Date.now().toString(),
-                    new Date().toLocaleString(),
+                    new Date().toLocaleString("en-GB", { timeZone: "Asia/Colombo" }),
                     data.lang || "",
                     data.rating || "",
                     data.name || "-",
@@ -37,7 +37,7 @@ export default {
                     data.purpose || "-",
                     data.message || "-"
                 ).run();
-                
+
                 return new Response(JSON.stringify({ success: true }), {
                     headers: { ...corsHeaders, "Content-Type": "application/json" }
                 });
