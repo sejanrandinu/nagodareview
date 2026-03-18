@@ -115,9 +115,17 @@ body {
     color: var(--primary);
 }
 
-#happyStats { color: #D97706; }
-#veryHappyStats { color: #059669; }
-#badStats { color: #DC2626; }
+#happyStats {
+    color: #D97706;
+}
+
+#veryHappyStats {
+    color: #059669;
+}
+
+#badStats {
+    color: #DC2626;
+}
 
 .table-container {
     background: var(--surface);
@@ -132,7 +140,8 @@ body {
     border-collapse: collapse;
 }
 
-.review-table th, .review-table td {
+.review-table th,
+.review-table td {
     padding: 1rem 1.5rem;
     text-align: left;
     border-bottom: 1px solid var(--border);
@@ -156,9 +165,35 @@ body {
     background: #F8FAFC;
 }
 
-.badge-bad { background: #FEE2E2; color: #DC2626; padding: 6px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; white-space: nowrap;}
-.badge-happy { background: #FEF3C7; color: #D97706; padding: 6px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; white-space: nowrap;}
-.badge-very-happy { background: #D1FAE5; color: #059669; padding: 6px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; white-space: nowrap;}
+.badge-bad {
+    background: #FEE2E2;
+    color: #DC2626;
+    padding: 6px 10px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge-happy {
+    background: #FEF3C7;
+    color: #D97706;
+    padding: 6px 10px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge-very-happy {
+    background: #D1FAE5;
+    color: #059669;
+    padding: 6px 10px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
 
 .footer {
     text-align: center;
@@ -182,22 +217,27 @@ body {
     .header-actions {
         display: none !important;
     }
+
     body {
         padding: 0;
         background: white;
     }
+
     .dashboard {
         max-width: 100%;
         margin: 0;
     }
+
     .stat-card {
         box-shadow: none;
         border: 1px solid var(--border);
     }
+
     .table-container {
         box-shadow: none;
         border: 1px solid var(--border);
     }
+
     .footer {
         display: none;
     }
