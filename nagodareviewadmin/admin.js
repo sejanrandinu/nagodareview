@@ -71,15 +71,15 @@ function loadData() {
                 let displayRating = '';
                 if (review.rating === 'very-happy') {
                     badgeClass = 'badge-very-happy';
-                    displayRating = 'ඉතා සතුටුදායකයි 🤩';
+                    displayRating = 'ඉතා හොඳයි 🤩';
                     veryHappyCount++;
                 } else if (review.rating === 'happy') {
                     badgeClass = 'badge-happy';
-                    displayRating = 'සතුටුදායකයි 😊';
+                    displayRating = 'හොඳයි 😊';
                     happyCount++;
                 } else {
                     badgeClass = 'badge-bad';
-                    displayRating = 'නරකයි 😞';
+                    displayRating = 'අසතුටුදායකයි 😞';
                     badCount++;
                 }
 
