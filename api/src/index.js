@@ -45,7 +45,12 @@ export default {
             }
 
             if (request.method === "DELETE") {
-                await env.DB.prepare("DELETE FROM reviews").run();
+                const id = url.searchParams.get("id");
+                if (id) {
+                    await env.DB.prepare("DELETE FROM reviews WHERE id = ?").bind(id).run();
+                } else {
+                    await env.DB.prepare("DELETE FROM reviews").run();
+                }
                 return new Response(JSON.stringify({ success: true }), {
                     headers: { ...corsHeaders, "Content-Type": "application/json" }
                 });

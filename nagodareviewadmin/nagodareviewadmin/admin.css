@@ -84,6 +84,31 @@ body {
     background: #059669;
 }
 
+.refresh-btn {
+    background: #6366F1;
+}
+
+.refresh-btn:hover {
+    background: #4F46E5;
+}
+
+.row-delete-btn {
+    background: #FEE2E2;
+    color: #DC2626;
+    border: 1px solid #FECACA;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.row-delete-btn:hover {
+    background: #FCA5A5;
+    color: white;
+}
+
 .stats-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -214,7 +239,7 @@ body {
 }
 
 @media print {
-    .header-actions {
+    .header-actions, .no-print {
         display: none !important;
     }
 
@@ -235,6 +260,12 @@ body {
 
     .table-container {
         box-shadow: none;
+        border: none;
+        overflow: visible !important;
+    }
+
+    .review-table {
+        width: 100%;
         border: 1px solid var(--border);
     }
 
