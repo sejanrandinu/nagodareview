@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
         window.print();
     });
 
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+        loadData();
+    });
+
     document.getElementById('pdfBtn').addEventListener('click', () => {
         const element = document.querySelector('.dashboard');
         // Temporarily hide actions for PDF
