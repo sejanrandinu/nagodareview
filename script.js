@@ -8,7 +8,7 @@ const translations = {
         namePlaceholder: "ඔබේ නම ඇතුළත් කරන්න",
         addressLabel: "ලිපිනය (කැමති නම් පමණක්)",
         addressPlaceholder: "ඔබේ ලිපිනය ඇතුළත් කරන්න",
-        purposeLabel: "පැමිණි කාර්යය (කැමති නම් පමණක්)",
+        purposeLabel: "පැමිණි කාර්යය *",
         purposePlaceholder: "ඔබ පැමිණි කාර්යය ඇතුළත් කරන්න",
         purposeDefault: "-- කරුණාකර තෝරන්න --",
         purposeRegistry: "රෙජිස්ට්‍රාර් අංශයේ කටයුතු",
@@ -42,7 +42,7 @@ const translations = {
         namePlaceholder: "உங்கள் பெயரை உள்ளிடவும்",
         addressLabel: "முகவரி (விருப்பமிருந்தால் மட்டும்)",
         addressPlaceholder: "உங்கள் முகவரியை உள்ளிடவும்",
-        purposeLabel: "வருகைக்கான காரணம் (விருப்பமிருந்தால் மட்டும்)",
+        purposeLabel: "வருகைக்கான காரணம் *",
         purposePlaceholder: "நீங்கள் வந்த காரணத்தை உள்ளிடவும்",
         purposeDefault: "-- தயவுசெய்து தேர்ந்தெடுக்கவும் --",
         purposeRegistry: "பதிவாளர் பிரிவு விவகாரங்கள்",
@@ -76,7 +76,7 @@ const translations = {
         namePlaceholder: "Enter your name",
         addressLabel: "Address (Optional)",
         addressPlaceholder: "Enter your address",
-        purposeLabel: "Purpose of Visit (Optional)",
+        purposeLabel: "Purpose of Visit *",
         purposePlaceholder: "Enter your purpose here",
         purposeDefault: "-- Please select --",
         purposeRegistry: "Registry section matters",
@@ -152,7 +152,7 @@ function updateLanguage() {
     document.getElementById('addressLabel').textContent = t.addressLabel;
     document.getElementById('userAddress').placeholder = t.addressPlaceholder;
 
-    document.getElementById('purposeLabel').textContent = t.purposeLabel;
+    document.getElementById('purposeLabel').innerHTML = t.purposeLabel.replace('*', '<span style="color: red;">*</span>');
     document.getElementById('userPurposeOther').placeholder = t.purposePlaceholder;
     
     document.getElementById('purposeOptionDefault').textContent = t.purposeDefault;
@@ -210,13 +210,22 @@ reviewForm.addEventListener('submit', (e) => {
     // Prepare data to send to API
     const userPurposeSelectElem = document.getElementById('userPurposeSelect');
     const userPurposeOtherElem = document.getElementById('userPurposeOther');
-    let purposeValue = "-";
+    let purposeValue = "";
     if (userPurposeSelectElem.value) {
         if (userPurposeSelectElem.value === 'other') {
-            purposeValue = userPurposeOtherElem.value || "-";
+            purposeValue = userPurposeOtherElem.value.trim();
+            if (!purposeValue) {
+                alert(currentLang === 'si' ? "කරුණාකර ඔබ පැමිණි කාර්යය ඇතුළත් කරන්න." : (currentLang === 'ta' ? "தயவுசெய்து உங்கள் வருகைக்கான காரணத்தை உள்ளிடவும்." : "Please enter your purpose of visit."));
+                userPurposeOtherElem.focus();
+                return;
+            }
         } else {
             purposeValue = userPurposeSelectElem.options[userPurposeSelectElem.selectedIndex].text;
         }
+    } else {
+        alert(currentLang === 'si' ? "කරුණාකර පැමිණි කාර්යය තෝරන්න." : (currentLang === 'ta' ? "தயவுசெய்து வருகைக்கான காரணத்தைத் தேர்ந்தெடுக்கவும்." : "Please select a purpose of visit."));
+        userPurposeSelectElem.focus();
+        return;
     }
 
     const reviewData = {
