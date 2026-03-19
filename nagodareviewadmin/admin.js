@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function loadData() {
     const tableBody = document.getElementById('tableBody');
-    tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 3rem; color: #64748B;">Loading...</td></tr>';
+    tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 3rem; color: #64748B;">Loading...</td></tr>';
 
     fetch(API_URL)
         .then(res => res.json())
@@ -59,7 +59,7 @@ function loadData() {
             tableBody.innerHTML = '';
 
             if (!reviews || reviews.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 3rem; color: #64748B;">No responses found yet.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 3rem; color: #64748B;">No responses found yet.</td></tr>';
                 updateStats(0, 0, 0, 0);
                 return;
             }
@@ -87,6 +87,7 @@ function loadData() {
                 <td style="white-space:nowrap; font-size:0.875rem;">${review.date}</td>
                 <td><span class="${badgeClass}">${displayRating}</span></td>
                 <td><strong style="color: #0F172A;">${escapeHtml(review.name)}</strong></td>
+                <td>${escapeHtml(review.phone)}</td>
                 <td>${escapeHtml(review.address)}</td>
                 <td>${escapeHtml(review.purpose)}</td>
                 <td>${escapeHtml(review.message)}</td>
@@ -100,7 +101,7 @@ function loadData() {
         })
         .catch(err => {
             console.error("Error loading data:", err);
-            tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 3rem; color: #EF4444;">Failed to load data. Please check your API connection.</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 3rem; color: #EF4444;">Failed to load data. Please check your API connection.</td></tr>';
             updateStats(0, 0, 0, 0);
         });
 }

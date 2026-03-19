@@ -5,6 +5,7 @@ CREATE TABLE reviews (
     lang TEXT,
     rating TEXT,
     name TEXT,
+    phone TEXT,
     address TEXT,
     purpose TEXT,
     message TEXT

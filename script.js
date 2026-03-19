@@ -6,6 +6,8 @@ const translations = {
         title: "පැමිණිලි සහ ප්‍රතිචාර",
         nameLabel: "නම (කැමති නම් පමණක්)",
         namePlaceholder: "ඔබේ නම ඇතුළත් කරන්න",
+        phoneLabel: "දුරකථන අංකය (කැමති නම් පමණක්)",
+        phonePlaceholder: "ඔබේ දුරකථන අංකය ඇතුළත් කරන්න",
         addressLabel: "ලිපිනය (කැමති නම් පමණක්)",
         addressPlaceholder: "ඔබේ ලිපිනය ඇතුළත් කරන්න",
         purposeLabel: "පැමිණි කාර්යය *",
@@ -40,6 +42,8 @@ const translations = {
         title: "புகார்கள் மற்றும் விமர்சனங்கள்",
         nameLabel: "பெயர் (விருப்பமிருந்தால் மட்டும்)",
         namePlaceholder: "உங்கள் பெயரை உள்ளிடவும்",
+        phoneLabel: "தொலைபேசி எண் (விருப்பமிருந்தால் மட்டும்)",
+        phonePlaceholder: "உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்",
         addressLabel: "முகவரி (விருப்பமிருந்தால் மட்டும்)",
         addressPlaceholder: "உங்கள் முகவரியை உள்ளிடவும்",
         purposeLabel: "வருகைக்கான காரணம் *",
@@ -74,6 +78,8 @@ const translations = {
         title: "Complaints & Reviews",
         nameLabel: "Name (Optional)",
         namePlaceholder: "Enter your name",
+        phoneLabel: "Phone Number (Optional)",
+        phonePlaceholder: "Enter your phone number",
         addressLabel: "Address (Optional)",
         addressPlaceholder: "Enter your address",
         purposeLabel: "Purpose of Visit *",
@@ -112,6 +118,10 @@ const langBtns = document.querySelectorAll('.lang-btn');
 const titleText = document.getElementById('titleText');
 const nameLabel = document.getElementById('nameLabel');
 const userNameInput = document.getElementById('userName');
+const phoneLabel = document.getElementById('phoneLabel');
+const userPhoneInput = document.getElementById('userPhone');
+const addressLabel = document.getElementById('addressLabel');
+const userAddressInput = document.getElementById('userAddress');
 const messageLabel = document.getElementById('messageLabel');
 const userMessageInput = document.getElementById('userMessage');
 const ratingBadText = document.getElementById('ratingBadText');
@@ -148,6 +158,9 @@ function updateLanguage() {
 
     nameLabel.textContent = t.nameLabel;
     userNameInput.placeholder = t.namePlaceholder;
+
+    phoneLabel.textContent = t.phoneLabel;
+    userPhoneInput.placeholder = t.phonePlaceholder;
 
     document.getElementById('addressLabel').textContent = t.addressLabel;
     document.getElementById('userAddress').placeholder = t.addressPlaceholder;
@@ -232,6 +245,7 @@ reviewForm.addEventListener('submit', (e) => {
         lang: currentLang,
         rating: rating.value,
         name: userNameInput.value || "Anonymous",
+        phone: userPhoneInput.value || "-",
         address: document.getElementById('userAddress').value || "-",
         purpose: purposeValue,
         message: userMessageInput.value || "-"
