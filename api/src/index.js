@@ -26,13 +26,14 @@ export default {
                 const data = await request.json();
 
                 await env.DB.prepare(
-                    "INSERT INTO reviews (id, date, lang, rating, name, address, purpose, message) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)"
+                    "INSERT INTO reviews (id, date, lang, rating, name, phone, address, purpose, message) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)"
                 ).bind(
                     Date.now().toString(),
                     new Date().toLocaleString("en-GB", { timeZone: "Asia/Colombo" }),
                     data.lang || "",
                     data.rating || "",
                     data.name || "-",
+                    data.phone || "-",
                     data.address || "-",
                     data.purpose || "-",
                     data.message || "-"
