@@ -46,12 +46,22 @@ export default {
 
             if (request.method === "DELETE") {
                 const id = url.searchParams.get("id");
+                const clearAll = url.searchParams.get("clear");
+                
                 if (id) {
                     await env.DB.prepare("DELETE FROM reviews WHERE id = ?").bind(id).run();
-                } else {
+                    return new Response(JSON.stringify({ success: true }), {
+                        headers: { ...corsHeaders, "Content-Type": "application/json" }
+                    });
+                } else if (clearAll === "true") {
                     await env.DB.prepare("DELETE FROM reviews").run();
+                    return new Response(JSON.stringify({ success: true }), {
+                        headers: { ...corsHeaders, "Content-Type": "application/json" }
+                    });
                 }
-                return new Response(JSON.stringify({ success: true }), {
+                
+                return new Response(JSON.stringify({ success: false, error: "Missing id or clear parameter" }), {
+                    status: 400,
                     headers: { ...corsHeaders, "Content-Type": "application/json" }
                 });
             }

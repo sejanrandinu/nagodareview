@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('clearBtn').addEventListener('click', () => {
         if (confirm("ඔබට සියලුම දත්ත මැකීමට අවශ්‍ය බව විශ්වාසද? / Are you sure you want to delete all reviews?")) {
-            fetch(API_URL, { method: "DELETE" })
+            fetch(`${API_URL}?clear=true`, { method: "DELETE" })
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
