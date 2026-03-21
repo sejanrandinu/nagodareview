@@ -826,6 +826,24 @@
           "description": "Binding to Cloudflare Media Transformations\n\nNOTE: This field is not automatically inherited from the top level environment, and so must be specified in every named environment.",
           "default": {}
         },
+        "stream": {
+          "type": "object",
+          "properties": {
+            "binding": {
+              "type": "string"
+            },
+            "remote": {
+              "type": "boolean",
+              "description": "Whether the Stream binding should be remote or not in local development"
+            }
+          },
+          "required": [
+            "binding"
+          ],
+          "additionalProperties": false,
+          "description": "Binding to Cloudflare Stream\n\nNOTE: This field is not automatically inherited from the top level environment, and so must be specified in every named environment.",
+          "default": {}
+        },
         "version_metadata": {
           "type": "object",
           "properties": {
@@ -2087,6 +2105,24 @@
           ],
           "additionalProperties": false,
           "description": "Binding to Cloudflare Media Transformations\n\nNOTE: This field is not automatically inherited from the top level environment, and so must be specified in every named environment.",
+          "default": {}
+        },
+        "stream": {
+          "type": "object",
+          "properties": {
+            "binding": {
+              "type": "string"
+            },
+            "remote": {
+              "type": "boolean",
+              "description": "Whether the Stream binding should be remote or not in local development"
+            }
+          },
+          "required": [
+            "binding"
+          ],
+          "additionalProperties": false,
+          "description": "Binding to Cloudflare Stream\n\nNOTE: This field is not automatically inherited from the top level environment, and so must be specified in every named environment.",
           "default": {}
         },
         "version_metadata": {
