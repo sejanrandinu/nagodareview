@@ -5,4 +5,4 @@ compatibility_date = "2024-03-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "reviews_db"
-database_id = "d300aad7-ba9f-4d46-8a1b-c4b7e9743c77"
+database_id = "6d5bdf70-0419-4fb4-88b7-731ffc204d6e"
