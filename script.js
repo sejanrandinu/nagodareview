@@ -1,4 +1,4 @@
-const API_URL = "https://nagoda-review-api.sejanrandinu01.workers.dev/api/reviews"; // Change this to your deployed worker URL
+const API_URL = "https://nagoda-feedbacks-api.nagodadb.workers.dev/api/reviews";
 
 const translations = {
     si: {
